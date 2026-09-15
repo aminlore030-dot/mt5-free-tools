@@ -1,0 +1,59 @@
+# Ready-to-use GitHub Pages deployment workflow.
+#
+# Move or copy this file to .github/workflows/deploy.yml to enable it, then set
+# Settings > Pages > Build and deployment > Source to "GitHub Actions".
+# It lives here because the token used to create this repository could not write
+# into .github/workflows/ (that path needs the "workflow" permission).
+#
+# Until then the site is fully deployable with Settings > Pages > Deploy from a
+# branch > main > / (root): the catalogue index is committed, so every page
+# works. The only thing this workflow adds is regenerating
+# assets/data/catalog.json and sitemap.xml automatically on every push.
+
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build catalogue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build product catalogue and sitemap
+        run: python3 scripts/build_catalog.py --site-url "${{ steps.pages.outputs.base_url }}"
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
