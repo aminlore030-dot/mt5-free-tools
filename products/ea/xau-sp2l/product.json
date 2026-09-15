@@ -1,0 +1,23 @@
+{
+  "id": "xau-sp2l",
+  "type": "ea",
+  "name": "XAU SP2L EA",
+  "version": "1.0.0",
+  "symbol": "XAUUSD",
+  "timeframe": "M1",
+  "description": "Reference product folder for an Expert Advisor. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
+  "file": "XAU_SP2L_EA.ex5",
+  "preview": "preview.png",
+  "free": true,
+  "featured": true,
+  "tags": ["gold", "xauusd", "example"],
+  "updated": "2026-09-15",
+  "license": "Free to use",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-15",
+      "notes": ["Product folder created. Waiting for the compiled .ex5 to be published."]
+    }
+  ]
+}

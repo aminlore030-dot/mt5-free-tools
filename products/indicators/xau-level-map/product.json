@@ -1,0 +1,23 @@
+{
+  "id": "xau-level-map",
+  "type": "indicator",
+  "name": "XAU Level Map",
+  "version": "1.0.0",
+  "symbol": "XAUUSD",
+  "timeframe": "All",
+  "description": "Reference product folder for an indicator. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
+  "file": "XAU_Level_Map.ex5",
+  "preview": "preview.png",
+  "free": true,
+  "featured": true,
+  "tags": ["gold", "levels", "example"],
+  "updated": "2026-09-15",
+  "license": "Free to use",
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-09-15",
+      "notes": ["Product folder created. Waiting for the compiled .ex5 to be published."]
+    }
+  ]
+}

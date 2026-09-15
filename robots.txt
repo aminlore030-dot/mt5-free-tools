@@ -1,0 +1,5 @@
+# MT5 Free Tools - everything here is public and crawlable.
+User-agent: *
+Allow: /
+
+Sitemap: https://aminlore030-dot.github.io/mt5-free-tools/sitemap.xml

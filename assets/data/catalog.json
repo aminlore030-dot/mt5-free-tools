@@ -1,0 +1,71 @@
+{
+  "generated": "2026-09-15T15:17:45Z",
+  "count": 2,
+  "source": "scripts/build_catalog.py",
+  "products": [
+    {
+      "id": "xau-level-map",
+      "type": "indicator",
+      "name": "XAU Level Map",
+      "version": "1.0.0",
+      "symbol": "XAUUSD",
+      "timeframe": "All",
+      "description": "Reference product folder for an indicator. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
+      "file": "XAU_Level_Map.ex5",
+      "preview": "",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "gold",
+        "levels",
+        "example"
+      ],
+      "updated": "2026-09-15",
+      "license": "Free to use",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-09-15",
+          "notes": [
+            "Product folder created. Waiting for the compiled .ex5 to be published."
+          ]
+        }
+      ],
+      "path": "products/indicators/xau-level-map",
+      "files": [],
+      "readme": "README.md"
+    },
+    {
+      "id": "xau-sp2l",
+      "type": "ea",
+      "name": "XAU SP2L EA",
+      "version": "1.0.0",
+      "symbol": "XAUUSD",
+      "timeframe": "M1",
+      "description": "Reference product folder for an Expert Advisor. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
+      "file": "XAU_SP2L_EA.ex5",
+      "preview": "",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "gold",
+        "xauusd",
+        "example"
+      ],
+      "updated": "2026-09-15",
+      "license": "Free to use",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-09-15",
+          "notes": [
+            "Product folder created. Waiting for the compiled .ex5 to be published."
+          ]
+        }
+      ],
+      "path": "products/ea/xau-sp2l",
+      "files": [],
+      "readme": "README.md"
+    }
+  ]
+}
