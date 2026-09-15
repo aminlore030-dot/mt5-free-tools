@@ -1,0 +1,93 @@
+/* ==========================================================================
+   MT5 Free Tools - responsive overrides
+   Loaded after style.css. Layouts are redesigned per viewport, not shrunk.
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .footer-grid { grid-template-columns: minmax(200px, 1fr) repeat(2, minmax(120px, 0.7fr)); }
+  .detail { grid-template-columns: minmax(0, 1fr) 280px; }
+  .doc-layout { grid-template-columns: 190px minmax(0, 1fr); }
+}
+
+@media (max-width: 920px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .hero-panel { order: 2; }
+
+  .detail { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { position: static; order: -1; }
+  .download-panel { padding: 18px; }
+}
+
+@media (max-width: 860px) {
+  .nav-toggle { display: inline-grid; margin-inline-start: auto; }
+
+  .nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    margin: 0;
+    padding: 10px clamp(16px, 4vw, 32px) 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+  }
+  .nav.is-open { display: flex; }
+  .nav a { padding: 11px 12px; font-size: 0.95rem; }
+
+  .site-header { position: sticky; }
+  .header-inner { position: relative; }
+}
+
+@media (max-width: 760px) {
+  .featured-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .toolbar { grid-template-columns: minmax(0, 1fr); }
+  .filter-row { justify-content: flex-start; }
+  .segmented { width: 100%; }
+  .segmented label { flex: 1; text-align: center; }
+
+  .tool { grid-template-columns: 96px minmax(0, 1fr); }
+  .tool-actions { grid-column: 1 / -1; flex-direction: row; min-width: 0; }
+  .tool-actions .btn { flex: 1; }
+
+  .doc-layout { grid-template-columns: minmax(0, 1fr); }
+  .doc-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-nav a { border: 1px solid var(--border); font-size: 0.875rem; }
+
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-note { flex-direction: column; gap: 6px; }
+}
+
+@media (max-width: 520px) {
+  .hero { padding-block: 30px 22px; }
+  .hero-actions .btn { flex: 1 1 auto; }
+
+  .section-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  .tool { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+  .tool .preview { max-width: 180px; }
+
+  .spec-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .result-bar { flex-direction: column; align-items: flex-start; gap: 4px; }
+
+  .footer-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+
+  .brand span { font-size: 0.9375rem; }
+}
+
+@media (min-width: 1400px) {
+  :root { --wrap: 1240px; }
+}
