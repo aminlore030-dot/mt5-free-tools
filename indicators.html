@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free MT5 indicators - MT5 Free Tools</title>
+<meta name="description" content="Free MetaTrader 5 indicators for levels, zones and signals. Direct .ex5 downloads, documented settings, no account required.">
+<link rel="canonical" href="https://aminlore030-dot.github.io/mt5-free-tools/indicators.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MT5 Free Tools">
+<meta property="og:title" content="Free MT5 indicators - MT5 Free Tools">
+<meta property="og:description" content="Free MetaTrader 5 indicators for levels, zones and signals. Direct .ex5 downloads, documented settings, no account required.">
+<meta property="og:url" content="https://aminlore030-dot.github.io/mt5-free-tools/indicators.html">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f8f6fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1a21" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/images/logo.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script>(function(){try{var t=localStorage.getItem("mt5-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke-opacity=".35"/><path d="M7.5 16V10.5M12 18V6.5M16.5 14.5V11"/><path d="M5 13h2.5M14 13h5" stroke-opacity=".45"/></svg>
+      <span data-site-name>MT5 Free Tools</span>
+    </a>
+    <button class="icon-btn nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html">Home</a><a href="products.html">All tools</a><a href="ea.html">Expert Advisors</a><a href="indicators.html">Indicators</a><a href="docs.html?page=installation">Install guide</a><a href="docs.html?page=faq">FAQ</a><a href="about.html">About</a>
+    </nav>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap page-head">
+    <p class="eyebrow">Chart analysis</p>
+    <h1>Indicators</h1>
+    <p class="lede">Chart tools that draw levels, zones and signals. They analyse and display, they do not place orders.</p>
+  </div>
+
+  <div class="wrap section" style="padding-top:22px" data-listing data-default-type="indicator">
+    <div class="toolbar">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        <label class="sr-only" for="tool-search">Search tools by name, symbol, timeframe or tag</label>
+        <input id="tool-search" type="search" data-search-input placeholder="Search name, symbol, timeframe, tag..." autocomplete="off">
+      </div>
+      <div class="filter-row">
+        <div class="segmented" role="group" aria-label="Filter by tool type">
+          <label><input type="radio" name="tool-type" value="all" data-filter-type><span>All</span></label>
+          <label><input type="radio" name="tool-type" value="ea" data-filter-type><span>Expert Advisors</span></label>
+          <label><input type="radio" name="tool-type" value="indicator" data-filter-type checked><span>Indicators</span></label>
+        </div>
+        <label class="field-inline">Symbol <select data-filter-symbol aria-label="Filter by symbol"><option value="all">Any symbol</option></select></label>
+        <label class="field-inline">Timeframe <select data-filter-timeframe aria-label="Filter by timeframe"><option value="all">Any timeframe</option></select></label>
+        <label class="check-inline"><input type="checkbox" data-filter-featured> Featured only</label>
+        <label class="field-inline">Sort <select data-sort aria-label="Sort results"><option value="name">Name</option><option value="updated">Recently updated</option></select></label>
+      </div>
+    </div>
+
+    <div class="result-bar">
+      <span data-result-count aria-live="polite">Loading catalogue...</span>
+      <button class="btn btn--quiet" type="button" data-reset-filters>Clear filters</button>
+    </div>
+
+    <div data-results></div>
+
+    <noscript>
+      <div class="state"><h3>JavaScript is switched off</h3><p>The catalogue index is read in the browser. With JavaScript disabled you can still browse and download every tool directly from the repository.</p><a class="btn btn--ghost" href="https://github.com/aminlore030-dot/mt5-free-tools/tree/main/products" rel="noopener">Open the products folder</a></div>
+    </noscript>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><span data-site-name>MT5 Free Tools</span></a>
+        <p class="small muted" style="margin-top:10px">Free MetaTrader 5 Expert Advisors and indicators, versioned and documented in a public GitHub repository.</p>
+        <a class="btn btn--ghost btn--sm" data-repo-link href="https://github.com/aminlore030-dot/mt5-free-tools" rel="noopener">View on GitHub</a>
+      </div>
+      <div>
+        <h2>Catalogue</h2>
+        <ul class="footer-links"><li><a href="products.html">All tools</a></li><li><a href="ea.html">Expert Advisors</a></li><li><a href="indicators.html">Indicators</a></li></ul>
+      </div>
+      <div>
+        <h2>Documentation</h2>
+        <ul class="footer-links"><li><a href="docs.html?page=installation">Installation</a></li><li><a href="docs.html?page=faq">FAQ</a></li><li><a href="docs.html?page=changelog">Changelog</a></li></ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="donate.html">Support</a></li><li><a data-issues-link href="https://github.com/aminlore030-dot/mt5-free-tools/issues" rel="noopener">Report an issue</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>&copy; <span data-year>2026</span> <span data-site-name>MT5 Free Tools</span>. Tools are free to download and use.</span>
+      <span>MetaTrader 5 is a product of MetaQuotes. This site is independent and not affiliated with MetaQuotes.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/markdown.js" defer></script>
+<script src="assets/js/search.js" defer></script>
+<script src="assets/js/products.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
