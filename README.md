@@ -16,13 +16,13 @@ Live site: https://aminlore030-dot.github.io/mt5-free-tools/
 - Installation guide, FAQ and changelog written once as Markdown in `docs/`
 - Light and dark theme, remembered in `localStorage`
 - Optional donation section, configured in one file, hidden when unset
-- Deploys itself on every push to `main`
+- Deploys itself on every push to `main` once the workflow is in place
 
 ## Repository structure
 
 ```
 .
-├── .github/workflows/deploy.yml   build catalogue + deploy to Pages
+├── .github/deploy-pages.workflow.yml   move to .github/workflows/deploy.yml
 ├── assets/
 │   ├── css/style.css              design system, components
 │   ├── css/responsive.css         breakpoint overrides
@@ -77,6 +77,10 @@ Live site: https://aminlore030-dot.github.io/mt5-free-tools/
 That is the whole process. No HTML file is ever edited to publish a product.
 Field reference: [products/README.md](products/README.md).
 
+If you deploy from the branch instead of Actions, run
+`python3 scripts/build_catalog.py` once before committing so the catalogue index
+includes the new folder.
+
 Useful behaviour while a tool is not finished:
 
 - No file in the folder yet: the page renders, the download button is disabled
@@ -128,12 +132,23 @@ python3 scripts/build_catalog.py --check
 
 ## Deployment
 
-Enable Pages once: **Settings**, **Pages**, **Build and deployment**, source
-**GitHub Actions**. After that, every push to `main` runs
-`.github/workflows/deploy.yml`, which checks out the repository, runs
-`scripts/build_catalog.py` with the Pages base URL, uploads the whole site as an
-artifact and deploys it with the official Pages actions. No third-party hosting,
-no paid service, no secrets required beyond the automatic Pages token.
+Two options, both free.
+
+**A. Deploy from a branch, works immediately.** Open **Settings**, **Pages**,
+**Build and deployment**, choose source **Deploy from a branch**, branch `main`,
+folder `/ (root)`. The catalogue index is committed, so every page works right
+away. Remember to run the build script locally when you add a product.
+
+**B. Deploy with GitHub Actions, rebuilds the catalogue for you.** Move
+`.github/deploy-pages.workflow.yml` to `.github/workflows/deploy.yml`, then set
+the Pages source to **GitHub Actions**. Every push to `main` checks out the
+repository, runs `scripts/build_catalog.py` with the Pages base URL, uploads the
+whole site as an artifact and deploys it with the official Pages actions. The
+workflow file sits outside `.github/workflows/` only because the token that
+created this site was not allowed to write into that folder.
+
+Either way: no third-party hosting, no paid service, no secrets beyond the
+automatic Pages token.
 
 Paths are relative everywhere, so the site works at
 `https://user.github.io/repo/` and at a domain root. `404.html` computes a
