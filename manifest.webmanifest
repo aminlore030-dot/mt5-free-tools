@@ -1,7 +1,9 @@
 {
-  "name": "MT5 Free Tools",
-  "short_name": "MT5 Tools",
-  "description": "Free MetaTrader 5 Expert Advisors and indicators with direct downloads.",
+  "name": "ابزارهای رایگان MT5",
+  "short_name": "ابزارهای MT5",
+  "description": "اکسپرت‌ها و اندیکاتورهای رایگان متاتریدر ۵ با دانلود مستقیم.",
+  "lang": "fa",
+  "dir": "rtl",
   "start_url": "./index.html",
   "scope": "./",
   "display": "browser",

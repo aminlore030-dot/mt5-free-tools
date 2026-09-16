@@ -1,6 +1,7 @@
 /* ==========================================================================
    MT5 Free Tools - shared runtime: helpers, theme, navigation, donation.
    No dependencies. Loaded on every page before products.js.
+   Interface language: Persian (fa).
    ========================================================================== */
 
 (function () {
@@ -33,9 +34,11 @@
     return out === "null" || out === "undefined" ? "" : out;
   }
 
+  function locale() { return clean(CFG.locale) || "fa-IR"; }
+
   function fetchText(url) {
     return fetch(url, { credentials: "omit" }).then(function (res) {
-      if (!res.ok) throw new Error("Request failed: " + res.status);
+      if (!res.ok) throw new Error("خطای دریافت: " + res.status);
       return res.text();
     });
   }
@@ -66,9 +69,13 @@
     if (!raw) return "";
     var date = new Date(raw);
     if (isNaN(date.getTime())) return raw;
-    return date.toLocaleDateString(undefined, {
-      year: "numeric", month: "short", day: "2-digit"
-    });
+    try {
+      return date.toLocaleDateString(locale(), {
+        year: "numeric", month: "long", day: "numeric"
+      });
+    } catch (err) {
+      return raw;
+    }
   }
 
   function setMeta(selector, attr, value) {
@@ -94,6 +101,7 @@
   MT5.qsa = qsa;
   MT5.escape = escapeHtml;
   MT5.clean = clean;
+  MT5.locale = locale;
   MT5.fetchText = fetchText;
   MT5.fetchJSON = fetchJSON;
   MT5.param = param;
@@ -115,8 +123,8 @@
     qsa("[data-theme-toggle]").forEach(function (btn) {
       btn.setAttribute("aria-pressed", value === "dark" ? "true" : "false");
       btn.setAttribute("aria-label", value === "dark"
-        ? "Switch to light theme"
-        : "Switch to dark theme");
+        ? "تغییر به پوسته روشن"
+        : "تغییر به پوسته تیره");
     });
     if (persist) {
       try { window.localStorage.setItem(THEME_KEY, value); } catch (err) { /* private mode */ }
@@ -141,11 +149,13 @@
       toggle.addEventListener("click", function () {
         var open = nav.classList.toggle("is-open");
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "بستن منو" : "باز کردن منو");
       });
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" && nav.classList.contains("is-open")) {
           nav.classList.remove("is-open");
           toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "باز کردن منو");
           toggle.focus();
         }
       });
@@ -168,7 +178,7 @@
   /* ------------------------------------------------------- config bindings */
 
   function initBindings() {
-    qsa("[data-site-name]").forEach(function (el) { el.textContent = clean(CFG.siteName) || "MT5 Free Tools"; });
+    qsa("[data-site-name]").forEach(function (el) { el.textContent = clean(CFG.siteName) || "ابزارهای رایگان MT5"; });
     qsa("[data-repo-link]").forEach(function (el) {
       var url = clean(CFG.repoUrl);
       if (url) el.setAttribute("href", url);
@@ -179,7 +189,13 @@
       if (url) el.setAttribute("href", url);
       else el.hidden = true;
     });
-    qsa("[data-year]").forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
+    qsa("[data-year]").forEach(function (el) {
+      try {
+        el.textContent = new Date().toLocaleDateString(locale(), { year: "numeric" });
+      } catch (err) {
+        el.textContent = String(new Date().getFullYear());
+      }
+    });
   }
 
   /* -------------------------------------------------------------- donation */
@@ -192,7 +208,7 @@
     return {
       enabled: d.enabled !== false,
       url: clean(d.url),
-      label: clean(d.label) || "Send a donation",
+      label: clean(d.label) || "حمایت مالی",
       note: clean(d.note),
       methods: methods
     };
@@ -226,7 +242,7 @@
       if (!state.enabled || !state.methods.length) { list.hidden = true; list.innerHTML = ""; return; }
       list.hidden = false;
       list.innerHTML = state.methods.map(function (m) {
-        var label = escapeHtml(clean(m.label) || "Donation link");
+        var label = escapeHtml(clean(m.label) || "روش حمایت");
         var detail = clean(m.detail);
         var url = clean(m.url);
         var head = url

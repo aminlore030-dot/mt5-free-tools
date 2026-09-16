@@ -6,8 +6,13 @@
 
 window.MT5_CONFIG = {
   /* Public identity */
-  siteName: "MT5 Free Tools",
-  tagline: "Free Expert Advisors and indicators for MetaTrader 5",
+  siteName: "ابزارهای رایگان MT5",
+  tagline: "اکسپرت‌ها و اندیکاتورهای رایگان برای متاتریدر ۵",
+
+  /* Interface language and direction, used by the runtime for date and
+     number formatting. Change both together if you translate the site. */
+  locale: "fa-IR",
+  direction: "rtl",
 
   /* Absolute site URL, used for canonical/OG metadata written by the build
      script. Change it once here (and in the <link rel="canonical"> tags of
@@ -28,8 +33,8 @@ window.MT5_CONFIG = {
   donation: {
     enabled: true,
     url: "",
-    label: "Send a donation",
-    note: "Donations are voluntary and never unlock anything. Every tool stays free.",
+    label: "حمایت مالی",
+    note: "حمایت مالی کاملاً اختیاری است و هیچ قابلیتی را باز نمی‌کند. همه ابزارها رایگان می‌مانند.",
     methods: []
     /* Example once you have real links:
     url: "https://ko-fi.com/yourname",

@@ -1,0 +1,66 @@
+/* ==========================================================================
+   MT5 Free Tools - Persian / RTL layer.
+   Loaded after style.css and responsive.css. Only direction, typography and
+   logical-property corrections live here, so the base stylesheet stays intact.
+   ========================================================================== */
+
+:root {
+  --font-sans: "Vazirmatn", "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body { line-height: 1.75; }
+
+/* Persian text takes neither negative tracking nor uppercase transforms well */
+h1, h2, h3, h4 { letter-spacing: 0; line-height: 1.35; }
+
+.eyebrow,
+.badge,
+.result-bar,
+.crumbs,
+.stat-list li,
+.stat-list .k,
+.specs,
+.specs dt, .specs .k,
+.spec-table dt,
+.footer-grid h2,
+.download-panel .price,
+.center-state .code,
+.preview--empty span,
+.changelog .ver,
+.prose th {
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.eyebrow { font-size: 0.78rem; }
+.badge { font-size: 0.72rem; }
+.result-bar, .crumbs, .specs { font-size: 0.8rem; }
+.specs dt, .specs .k, .spec-table dt, .stat-list .k { font-size: 0.75rem; }
+.footer-grid h2 { font-size: 0.8rem; }
+.download-panel .price { font-size: 0.85rem; }
+
+/* Latin-only content stays left-to-right inside an RTL page */
+code, kbd, samp, pre, .mono,
+.file-row .name, .file-row .size,
+.spec-table dd,
+.donate-methods .detail,
+.center-state .code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+pre { text-align: left; }
+
+/* Logical-property fixes for the few physical offsets in style.css */
+ul, ol { padding-left: 0; padding-inline-start: 1.25rem; }
+.changelog ul { padding-left: 0; padding-inline-start: 1.1rem; }
+.prose ul, .prose ol { padding-left: 0; padding-inline-start: 1.25rem; }
+
+.skip-link { left: auto; inset-inline-start: 16px; }
+
+.search-field svg { left: auto; inset-inline-start: 12px; }
+.search-field input { padding: 10px; padding-inline: 36px 14px; }
+
+.steps li { padding-left: 0; padding-inline-start: 40px; }
+.steps li::before { left: auto; inset-inline-start: 0; }
+
+.prose th, .prose td { text-align: start; }
