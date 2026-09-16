@@ -1,6 +1,6 @@
 /* ==========================================================================
    MT5 Free Tools - product catalogue: loading, normalising, rendering,
-   filtering and the product detail page.
+   filtering and the product detail page. Interface language: Persian (fa).
 
    The catalogue is a generated JSON index (assets/data/catalog.json) built
    from every product.json under products/ in the repository, so adding a product
@@ -14,23 +14,38 @@
   var CFG = window.MT5_CONFIG || {};
 
   var TYPES = {
-    ea: { key: "ea", label: "Expert Advisor", plural: "Expert Advisors", short: "EA", folder: "MQL5/Experts", page: "ea.html" },
-    indicator: { key: "indicator", label: "Indicator", plural: "Indicators", short: "IND", folder: "MQL5/Indicators", page: "indicators.html" },
-    script: { key: "script", label: "Script", plural: "Scripts", short: "SCR", folder: "MQL5/Scripts", page: "products.html" },
-    other: { key: "other", label: "Tool", plural: "Tools", short: "MT5", folder: "MQL5", page: "products.html" }
+    ea: { key: "ea", label: "اکسپرت ادوایزر", plural: "اکسپرت‌ها", short: "EA", folder: "MQL5/Experts", page: "ea.html" },
+    indicator: { key: "indicator", label: "اندیکاتور", plural: "اندیکاتورها", short: "IND", folder: "MQL5/Indicators", page: "indicators.html" },
+    script: { key: "script", label: "اسکریپت", plural: "اسکریپت‌ها", short: "SCR", folder: "MQL5/Scripts", page: "products.html" },
+    other: { key: "other", label: "ابزار", plural: "ابزارها", short: "MT5", folder: "MQL5", page: "products.html" }
   };
 
   var FILE_LABELS = {
-    ex5: "Compiled MT5 program",
-    mq5: "MQL5 source code",
-    mqh: "MQL5 include file",
-    zip: "Archive",
-    set: "Parameter preset",
-    tpl: "Chart template",
-    pdf: "Documentation",
-    chr: "Chart profile",
-    txt: "Text file",
-    csv: "Data file"
+    ex5: "برنامه کامپایل‌شده متاتریدر ۵",
+    mq5: "کد منبع MQL5",
+    mqh: "فایل include زبان MQL5",
+    zip: "فایل فشرده",
+    set: "فایل تنطیمات آماده",
+    tpl: "قالب چارت",
+    pdf: "مستندات",
+    chr: "پروفایل چارت",
+    txt: "فایل متنی",
+    csv: "فایل داده"
+  };
+
+  var T = {
+    any: "همه",
+    notSet: "تعیین نشده",
+    dash: "نامشخص",
+    free: "رایگان",
+    featured: "منتخب",
+    download: "دانلود",
+    noFile: "فایل منتشر نشده",
+    noFileTitle: "برای این ابزار هنوز فایلی در مخزن منتشر نشده است",
+    details: "جزئیات",
+    noPreview: "بدون پیش‌نمایش",
+    licenceFree: "استفاده آزاد",
+    unavailable: "در دسترس نیست"
   };
 
   function clean(value) { return MT5.clean ? MT5.clean(value) : (value == null ? "" : String(value).trim()); }
@@ -74,7 +89,7 @@
       path: path,
       ext: ext,
       size: Number(file.size) > 0 ? Number(file.size) : 0,
-      label: clean(file.label) || FILE_LABELS[ext] || "Download",
+      label: clean(file.label) || FILE_LABELS[ext] || T.download,
       primary: file.primary === true
     };
   }
@@ -177,12 +192,12 @@
   /* -------------------------------------------------------------- markup */
 
   function previewMarkup(product, sizeClass) {
-    var label = esc(product.typeShort + " preview pending");
+    var label = esc(T.noPreview);
     if (!product.preview) {
-      return '<span class="preview preview--empty ' + (sizeClass || "") + '"><span>No preview yet</span></span>';
+      return '<span class="preview preview--empty ' + (sizeClass || "") + '"><span>' + esc(T.noPreview) + "</span></span>";
     }
     return '<span class="preview ' + (sizeClass || "") + '" data-label="' + label + '">' +
-      '<img src="' + esc(product.preview) + '" alt="' + esc(product.name + " screenshot") +
+      '<img src="' + esc(product.preview) + '" alt="' + esc("تصویر " + product.name + " روی چارت") +
       '" loading="lazy" decoding="async" data-preview></span>';
   }
 
@@ -192,7 +207,7 @@
         var host = img.parentNode;
         if (!host) return;
         host.classList.add("preview--empty");
-        var label = host.getAttribute("data-label") || "No preview yet";
+        var label = host.getAttribute("data-label") || T.noPreview;
         img.remove();
         if (!host.querySelector("span")) {
           var span = document.createElement("span");
@@ -205,10 +220,10 @@
 
   function specsMarkup(product) {
     var rows = [
-      ["Type", product.typeLabel],
-      ["Version", product.version ? "v" + product.version : "n/a"],
-      ["Symbol", product.symbol || "any"],
-      ["Timeframe", product.timeframe || "any"]
+      ["نوع", product.typeLabel],
+      ["نسخه", product.version ? "v" + product.version : T.dash],
+      ["نماد", product.symbol || T.any],
+      ["تایم‌فریم", product.timeframe || T.any]
     ];
     return '<dl class="specs">' + rows.map(function (row) {
       return "<div><dt>" + esc(row[0]) + "</dt><dd>" + esc(row[1]) + "</dd></div>";
@@ -217,20 +232,20 @@
 
   function badgesMarkup(product) {
     var out = '<span class="badge badge--type">' + esc(product.typeShort) + "</span>";
-    if (product.free) out += '<span class="badge badge--free">Free</span>';
-    if (product.featured) out += '<span class="badge">Featured</span>';
+    if (product.free) out += '<span class="badge badge--free">' + esc(T.free) + "</span>";
+    if (product.featured) out += '<span class="badge">' + esc(T.featured) + "</span>";
     return out;
   }
 
   function downloadMarkup(product, extraClass) {
     var cls = "btn " + (extraClass || "");
     if (!product.primaryFile) {
-      return '<span class="' + cls + '" aria-disabled="true" role="button" title="No file published for this tool yet">File not published</span>';
+      return '<span class="' + cls + '" aria-disabled="true" role="button" title="' + esc(T.noFileTitle) + '">' + esc(T.noFile) + "</span>";
     }
     var size = MT5.formatBytes(product.primaryFile.size);
     return '<a class="' + cls + '" href="' + esc(product.primaryFile.path) + '" download>' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
-      '<path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>Download' +
+      '<path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>' + esc(T.download) +
       (size ? ' <span class="mono small">' + esc(size) + "</span>" : "") + "</a>";
   }
 
@@ -245,7 +260,7 @@
         specsMarkup(product) +
       "</div>" +
       '<div class="tool-actions">' + downloadMarkup(product, "btn--sm") +
-        '<a class="btn btn--sm btn--ghost" href="' + esc(product.url) + '">View details</a>' +
+        '<a class="btn btn--sm btn--ghost" href="' + esc(product.url) + '">' + esc(T.details) + "</a>" +
       "</div>" +
     "</li>";
   }
@@ -259,7 +274,7 @@
         (product.description ? "<p>" + esc(product.description) + "</p>" : "") +
         specsMarkup(product) +
         '<div class="actions">' + downloadMarkup(product, "btn--sm") +
-          '<a class="btn btn--sm btn--ghost" href="' + esc(product.url) + '">Details</a>' +
+          '<a class="btn btn--sm btn--ghost" href="' + esc(product.url) + '">' + esc(T.details) + "</a>" +
         "</div>" +
       "</div>" +
     "</article>";
@@ -292,12 +307,12 @@
         items.forEach(function (p) { if (counts[p.type] !== undefined) counts[p.type]++; });
         var downloadable = items.filter(function (p) { return !!p.primaryFile; }).length;
         var rows = [
-          ["Expert Advisors", String(counts.ea)],
-          ["Indicators", String(counts.indicator)],
-          ["Ready to download", String(downloadable)],
-          ["Price", "Always free"]
+          ["اکسپرت‌ها", String(counts.ea)],
+          ["اندیکاتورها", String(counts.indicator)],
+          ["آماده دانلود", String(downloadable)],
+          ["قیمت", "همیشه رایگان"]
         ];
-        if (state.meta.generated) rows.push(["Catalogue built", MT5.formatDate(state.meta.generated)]);
+        if (state.meta.generated) rows.push(["ساخت کاتالوگ", MT5.formatDate(state.meta.generated)]);
         statsHost.innerHTML = rows.map(function (row) {
           return '<li><span class="k">' + esc(row[0]) + '</span><span class="v">' + esc(row[1]) + "</span></li>";
         }).join("");
@@ -308,9 +323,9 @@
         if (!featured.length) featured = items.slice(0, 2);
         if (!featured.length) {
           featuredHost.innerHTML = emptyState(
-            "No tools published yet",
-            "The catalogue is empty. Add a folder under products/ea or products/indicators with a product.json file and it appears here automatically.",
-            '<a class="btn btn--ghost" data-repo-link href="#">Open the repository</a>'
+            "هنوز ابزاری منتشر نشده است",
+            "کاتالوگ خالی است. کافی است یک پوشه زیر products/ea یا products/indicators با فایل product.json اضافه کنید تا همین‌جا نمایش داده شود.",
+            '<a class="btn btn--ghost" data-repo-link href="#">باز کردن مخزن</a>'
           );
           var link = MT5.qs("[data-repo-link]", featuredHost);
           if (link && CFG.repoUrl) link.setAttribute("href", CFG.repoUrl);
@@ -326,16 +341,16 @@
         var limit = parseInt(host.getAttribute("data-limit"), 10) || 4;
         var subset = items.filter(function (p) { return p.type === type; }).slice(0, limit);
         renderList(host, subset,
-          "Nothing here yet",
-          "No " + typeMeta(type).plural.toLowerCase() + " have been published so far. New releases show up here automatically.");
+          "فعلاً خالی است",
+          "هنوز موردی در بخش " + typeMeta(type).plural + " منتشر نشده است. نسخه‌های جدید به‌صورت خودکار همین‌جا نمایش داده می‌شوند.");
       });
     }).catch(function (err) {
       var hosts = [featuredHost].concat(lists).filter(Boolean);
       hosts.forEach(function (host) {
-        host.innerHTML = emptyState("Catalogue unavailable",
-          "The product catalogue could not be loaded (" + err.message + "). Reload the page or check the repository.");
+        host.innerHTML = emptyState("کاتالوگ در دسترس نیست",
+          "فهرست محصولات بارگزاری نشد (" + err.message + "). صفحه را دوباره بارگزاری کنید یا مخزن را ببینید.");
       });
-      if (statsHost) statsHost.innerHTML = '<li><span class="k">Catalogue</span><span class="v">unavailable</span></li>';
+      if (statsHost) statsHost.innerHTML = '<li><span class="k">کاتالوگ</span><span class="v">' + esc(T.unavailable) + "</span></li>";
     });
   }
 
@@ -391,8 +406,8 @@
     host.innerHTML = '<div class="skeleton-list"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>';
 
     load().then(function (items) {
-      fillSelect(symbolSelect, uniqueValues(items, "symbol"), "Any symbol");
-      fillSelect(tfSelect, uniqueValues(items, "timeframe"), "Any timeframe");
+      fillSelect(symbolSelect, uniqueValues(items, "symbol"), "همه نمادها");
+      fillSelect(tfSelect, uniqueValues(items, "timeframe"), "همه تایم‌فریم‌ها");
 
       if (searchInput) searchInput.value = filters.q;
       if (symbolSelect) symbolSelect.value = hasOption(symbolSelect, filters.symbol) ? filters.symbol : "all";
@@ -452,19 +467,19 @@
             return String(b.updated || "").localeCompare(String(a.updated || ""));
           });
         } else if (!clean(filters.q)) {
-          result = result.slice().sort(function (a, b) { return a.name.localeCompare(b.name); });
+          result = result.slice().sort(function (a, b) { return a.name.localeCompare(b.name, MT5.locale ? MT5.locale() : "fa"); });
         }
 
         renderList(host, result,
-          items.length ? "No tools match these filters" : "No tools published yet",
+          items.length ? "هیچ ابزاری با این فیلترها پیدا نشد" : "هنوز ابزاری منتشر نشده است",
           items.length
-            ? "Try a different search term, or clear the filters to see the whole catalogue."
-            : "Add a folder under products/ea or products/indicators with a product.json file and it appears here automatically.");
+            ? "عبارت دیگری را جستجو کنید یا فیلترها را پاک کنید تا همه کاتالوگ را ببینید."
+            : "کافی است یک پوشه زیر products/ea یا products/indicators با فایل product.json اضافه کنید تا همین‌جا نمایش داده شود.");
 
         if (countEl) {
           countEl.textContent = result.length === items.length
-            ? result.length + (result.length === 1 ? " tool" : " tools")
-            : result.length + " of " + items.length + " tools";
+            ? result.length + " ابزار"
+            : result.length + " از " + items.length + " ابزار";
         }
         syncUrl();
       }
@@ -482,9 +497,9 @@
         window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : ""));
       }
     }).catch(function (err) {
-      host.innerHTML = emptyState("Catalogue unavailable",
-        "The product catalogue could not be loaded (" + err.message + "). Reload the page or check the repository.");
-      if (countEl) countEl.textContent = "unavailable";
+      host.innerHTML = emptyState("کاتالوگ در دسترس نیست",
+        "فهرست محصولات بارگزاری نشد (" + err.message + "). صفحه را دوباره بارگزاری کنید یا مخزن را ببینید.");
+      if (countEl) countEl.textContent = T.unavailable;
     });
 
     function hasOption(select, value) {
@@ -497,15 +512,15 @@
   function defaultInstallSteps(product) {
     var folder = product.installFolder || "MQL5/Experts";
     var attachStep = product.type === "indicator"
-      ? "Drag the indicator from the Navigator onto a chart of your symbol."
-      : "Drag the Expert Advisor onto a chart, then enable Algo Trading in the toolbar.";
+      ? "اندیکاتور را از پنجره Navigator روی چارت نماد خود بکشید."
+      : "اکسپرت را روی چارت بکشید و سپس دکمه Algo Trading را در نوار ابزار فعال کنید.";
     return [
-      "Download the file from the panel on this page.",
-      "In MetaTrader 5 open File, then Open Data Folder.",
-      "Copy the file into " + folder + ".",
-      "Restart MetaTrader 5, or right-click in the Navigator panel and choose Refresh.",
+      "فایل را از پنل دانلود همین صفحه دریافت کنید.",
+      "در متاتریدر ۵ از منوی File گزینه Open Data Folder را باز کنید.",
+      "فایل را در پوشه " + folder + " کپی کنید.",
+      "متاتریدر ۵ را ریستارت کنید یا در پنجره Navigator راست‌کلیک کنید و Refresh بزنید.",
       attachStep,
-      "Test on a demo account first and check the inputs against the documentation."
+      "اول روی حساب دمو تست کنید و ورودی‌ها را با مستندات بسنجید."
     ];
   }
 
@@ -523,6 +538,7 @@
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       name: product.name,
+      inLanguage: "fa",
       applicationCategory: "FinanceApplication",
       operatingSystem: "MetaTrader 5",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
@@ -536,74 +552,74 @@
   }
 
   function renderDetail(product, hosts) {
-    var siteName = clean(CFG.siteName) || "MT5 Free Tools";
+    var siteName = clean(CFG.siteName) || "ابزارهای رایگان MT5";
     MT5.setTitle(product.name + (product.version ? " " + product.version : "") + " - " + siteName);
-    MT5.setDescription(product.description || product.name + " for MetaTrader 5, free download.");
+    MT5.setDescription(product.description || product.name + " برای متاتریدر ۵، دانلود رایگان.");
     structuredData(product);
 
     if (hosts.crumb) {
-      hosts.crumb.innerHTML = '<a href="index.html">Home</a><span>/</span>' +
+      hosts.crumb.innerHTML = '<a href="index.html">خانه</a><span>/</span>' +
         '<a href="' + esc(typeMeta(product.type).page) + '">' + esc(product.typePlural) + "</a>" +
         "<span>/</span>" + esc(product.name);
     }
 
     hosts.head.innerHTML =
-      '<p class="eyebrow">' + esc(product.typeLabel) + (product.version ? " &middot; Version " + esc(product.version) : "") + "</p>" +
+      '<p class="eyebrow">' + esc(product.typeLabel) + (product.version ? " &middot; نسخه " + esc(product.version) : "") + "</p>" +
       "<h1>" + esc(product.name) + "</h1>" +
       (product.description ? '<p class="lede">' + esc(product.description) + "</p>" : "") +
       '<div class="badge-row">' + badgesMarkup(product) +
-      (product.updated ? '<span class="badge">Updated ' + esc(MT5.formatDate(product.updated)) + "</span>" : "") +
+      (product.updated ? '<span class="badge">به‌روزرسانی ' + esc(MT5.formatDate(product.updated)) + "</span>" : "") +
       "</div>";
 
     var body = [];
 
     if (product.preview) {
       body.push('<figure style="margin:0">' + previewMarkup(product) +
-        '<figcaption class="small muted" style="margin-top:8px">' + esc(product.name) + " on a MetaTrader 5 chart</figcaption></figure>");
+        '<figcaption class="small muted" style="margin-top:8px">' + esc(product.name) + " روی چارت متاتریدر ۵</figcaption></figure>");
     }
 
-    body.push("<div><h2>Specification</h2>" +
+    body.push("<div><h2>مشخصات</h2>" +
       '<dl class="spec-table">' +
-      [["Type", product.typeLabel],
-       ["Version", product.version ? "v" + product.version : "not set"],
-       ["Symbol", product.symbol || "any"],
-       ["Timeframe", product.timeframe || "any"],
-       ["Install folder", product.installFolder],
-       ["Licence", product.license || "Free to use"]]
+      [["نوع", product.typeLabel],
+       ["نسخه", product.version ? "v" + product.version : T.notSet],
+       ["نماد", product.symbol || T.any],
+       ["تایم‌فریم", product.timeframe || T.any],
+       ["پوشه نصب", product.installFolder],
+       ["مجوز", product.license || T.licenceFree]]
       .map(function (row) { return "<div><dt>" + esc(row[0]) + "</dt><dd>" + esc(row[1]) + "</dd></div>"; }).join("") +
       "</dl></div>");
 
     if (product.longDescription) {
-      body.push("<div><h2>Overview</h2><div class=\"prose\">" + MT5.markdown(product.longDescription) + "</div></div>");
+      body.push("<div><h2>معرفی</h2><div class=\"prose\">" + MT5.markdown(product.longDescription) + "</div></div>");
     }
 
     if (product.features.length) {
-      body.push("<div><h2>Features</h2><ul>" + product.features.map(function (item) {
+      body.push("<div><h2>ویژگی‌ها</h2><ul>" + product.features.map(function (item) {
         return "<li>" + esc(item) + "</li>";
       }).join("") + "</ul></div>");
     }
 
     if (product.requirements.length) {
-      body.push("<div><h2>Requirements</h2><ul>" + product.requirements.map(function (item) {
+      body.push("<div><h2>پیش‌نیازها</h2><ul>" + product.requirements.map(function (item) {
         return "<li>" + esc(item) + "</li>";
       }).join("") + "</ul></div>");
     }
 
     var steps = product.install.length ? product.install : defaultInstallSteps(product);
-    body.push('<div><h2>Installation</h2><ol class="steps">' + steps.map(function (step) {
+    body.push('<div><h2>نصب</h2><ol class="steps">' + steps.map(function (step) {
       return "<li>" + esc(step) + "</li>";
     }).join("") + "</ol>" +
-      '<p class="small muted">Full walkthrough with screenshots of the MetaTrader folders: ' +
-      '<a href="docs.html?page=installation">installation guide</a>.</p></div>');
+      '<p class="small muted">راهنمای کامل همراه با جزئیات پوشه‌های متاتریدر: ' +
+      '<a href="docs.html?page=installation">راهنمای نصب</a>.</p></div>');
 
     if (product.readme) {
-      body.push('<div data-readme hidden><h2>Documentation</h2><div class="prose" data-readme-body></div></div>');
+      body.push('<div data-readme hidden><h2>مستندات</h2><div class="prose" data-readme-body></div></div>');
     }
 
     if (product.changelog.length) {
-      body.push('<div><h2>Changelog</h2><ul class="changelog">' + product.changelog.map(function (entry) {
+      body.push('<div><h2>تاریخچه تغییرات</h2><ul class="changelog">' + product.changelog.map(function (entry) {
         return "<li>" +
-          '<div class="ver"><strong>' + esc(entry.version ? "v" + entry.version : "Update") + "</strong>" +
+          '<div class="ver"><strong>' + esc(entry.version ? "v" + entry.version : "به‌روزرسانی") + "</strong>" +
           (entry.date ? "<time>" + esc(MT5.formatDate(entry.date)) + "</time>" : "") + "</div>" +
           (entry.notes.length ? "<ul>" + entry.notes.map(function (note) {
             return "<li>" + esc(note) + "</li>";
@@ -611,9 +627,9 @@
           "</li>";
       }).join("") + "</ul></div>");
     } else {
-      body.push('<div><h2>Changelog</h2><p class="muted small">No release notes recorded yet' +
-        (product.version ? " for version " + esc(product.version) : "") +
-        '. Site-wide release history lives in the <a href="docs.html?page=changelog">changelog</a>.</p></div>');
+      body.push('<div><h2>تاریخچه تغییرات</h2><p class="muted small">هنوز یادداشتی برای این نسخه' +
+        (product.version ? " (" + esc(product.version) + ")" : "") +
+        ' ثبت نشده است. تاریخچه کلی سایت در <a href="docs.html?page=changelog">بخش تغییرات</a> قرار دارد.</p></div>');
     }
 
     hosts.body.innerHTML = body.join("");
@@ -630,18 +646,18 @@
     }
 
     var download = [];
-    download.push('<h2>Download</h2><p class="price">Free &middot; no account needed</p>');
+    download.push('<h2>دانلود</h2><p class="price">رایگان &middot; بدون نیاز به حساب</p>');
     download.push(downloadMarkup(product, "btn--block"));
     if (!product.primaryFile) {
-      download.push('<p class="small muted" style="margin-top:12px">No binary has been published for this tool yet. ' +
-        'Once the file is committed to <code>' + esc(product.path || "the product folder") + '</code> the button activates automatically.</p>');
+      download.push('<p class="small muted" style="margin-top:12px">برای این ابزار هنوز فایل اجرایی منتشر نشده است. ' +
+        'به محض اینکه فایل در <code>' + esc(product.path || "پوشه محصول") + '</code> کامیت شود، دکمه دانلود خودبه‌خود فعال می‌شود.</p>');
     } else {
-      download.push('<p class="small muted" style="margin-top:12px">Primary file: <code>' +
+      download.push('<p class="small muted" style="margin-top:12px">فایل اصلی: <code>' +
         esc(product.primaryFile.name) + "</code>" +
         (product.primaryFile.label ? " &middot; " + esc(product.primaryFile.label) : "") + "</p>");
     }
     if (product.files.length > 1) {
-      download.push('<h3 class="small" style="margin-top:16px">All files</h3><ul class="file-list">' +
+      download.push('<h3 class="small" style="margin-top:16px">همه فایل‌ها</h3><ul class="file-list">' +
         product.files.map(fileRow).join("") + "</ul>");
     }
     hosts.download.innerHTML = download.join("");
@@ -664,29 +680,29 @@
       if (hosts.shell) hosts.shell.hidden = true;
       if (hosts.missing) {
         hosts.missing.hidden = false;
-        hosts.missing.innerHTML = '<div class="center-state"><p class="code">Not found</p><h1>' + esc(title) + "</h1>" +
+        hosts.missing.innerHTML = '<div class="center-state"><p class="code">۴۰۴</p><h1>' + esc(title) + "</h1>" +
           '<p class="lede" style="margin-inline:auto">' + esc(message) + "</p>" +
-          '<div class="actions"><a class="btn" href="products.html">Browse all tools</a>' +
-          '<a class="btn btn--ghost" href="index.html">Back to home</a></div></div>';
+          '<div class="actions"><a class="btn" href="products.html">مرور همه ابزارها</a>' +
+          '<a class="btn btn--ghost" href="index.html">بازگشت به خانه</a></div></div>';
       }
-      MT5.setTitle("Tool not found - " + (clean(CFG.siteName) || "MT5 Free Tools"));
+      MT5.setTitle("ابزار پیدا نشد - " + (clean(CFG.siteName) || "ابزارهای رایگان MT5"));
     }
 
     var id = clean(MT5.param("id"));
     if (!id) {
-      fail("No tool selected", "This page needs a tool reference, for example product.html?id=my-tool. Pick a tool from the catalogue instead.");
+      fail("ابزاری انتخاب نشده", "این صفحه به شناسه ابزار نیاز دارد، مانند product.html?id=my-tool. یک ابزار را از کاتالوگ انتخاب کنید.");
       return;
     }
 
     load().then(function () {
       var product = byId(id);
       if (!product) {
-        fail("That tool is not in the catalogue", "The reference \"" + id + "\" does not match any published tool. It may have been renamed or not published yet.");
+        fail("این ابزار در کاتالوگ نیست", "شناسه «" + id + "» با هیچ ابزار منتشرشده‌ای مطابقت ندارد. ممکن است نامش عوض شده یا هنوز منتشر نشده باشد.");
         return;
       }
       renderDetail(product, hosts);
     }).catch(function (err) {
-      fail("Catalogue unavailable", "The product catalogue could not be loaded (" + err.message + ").");
+      fail("کاتالوگ در دسترس نیست", "فهرست محصولات بارگزاری نشد (" + err.message + ").");
     });
   }
 
@@ -696,22 +712,22 @@
     var host = MT5.qs("[data-doc-body]");
     if (!host) return;
     var allowed = {
-      installation: { file: "docs/installation.md", title: "Installation guide" },
-      faq: { file: "docs/faq.md", title: "FAQ" },
-      changelog: { file: "docs/changelog.md", title: "Changelog" }
+      installation: { file: "docs/installation.md", title: "راهنمای نصب" },
+      faq: { file: "docs/faq.md", title: "سوالات متداول" },
+      changelog: { file: "docs/changelog.md", title: "تاریخچه تغییرات" }
     };
     var key = clean(MT5.param("page")) || "installation";
     var doc = allowed[key] || allowed.installation;
-    var siteName = clean(CFG.siteName) || "MT5 Free Tools";
+    var siteName = clean(CFG.siteName) || "ابزارهای رایگان MT5";
     MT5.setTitle(doc.title + " - " + siteName);
 
     MT5.fetchText(doc.file).then(function (text) {
-      if (!clean(text)) throw new Error("empty document");
+      if (!clean(text)) throw new Error("سند خالی است");
       host.innerHTML = MT5.markdown(text);
     }).catch(function (err) {
-      host.innerHTML = emptyState("Document unavailable",
-        "This page could not be loaded (" + err.message + "). The same content is readable in the repository under docs/.",
-        '<a class="btn btn--ghost" href="' + esc(clean(CFG.repoUrl) || "#") + '">Open the repository</a>');
+      host.innerHTML = emptyState("این سند در دسترس نیست",
+        "بارگزاری این صفحه ناموفق بود (" + err.message + "). همین محتوا در مخزن و پوشه docs/ قابل خواندن است.",
+        '<a class="btn btn--ghost" href="' + esc(clean(CFG.repoUrl) || "#") + '">باز کردن مخزن</a>');
     });
   }
 
