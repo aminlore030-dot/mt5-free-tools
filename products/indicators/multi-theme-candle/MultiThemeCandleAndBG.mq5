@@ -1,1 +1,0 @@
-MQ5 Source Code - MultiTheme Candle and Background Customizer for MetaTrader 5. Allows real-time customization of candle colors and chart background based on market conditions.

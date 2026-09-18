@@ -1,22 +1,22 @@
 # XAU Level Map
 
-This folder is the working example of how an indicator is published on the site.
-The metadata is real and live; the compiled program is not published yet, so the
-product page shows the specification with the download button disabled rather
-than linking to a missing file.
+این پوشه نمونه‌ای زنده از ساختار یک اندیکاتور روی سایت است. متادیتا واقعی و
+منتشرشده است، اما برنامه کامپایل‌شده هنوز وجود ندارد؛ به همین دلیل صفحه ابزار
+مشخصات را نشان می‌دهد و دکمه دانلود به‌جای لینک فایل ناموجود، غیرفعال است.
 
-## Publishing the real tool
+## انتشار ابزار واقعی
 
-1. Drop the compiled file into this folder as `XAU_Level_Map.ex5` (or change the
-   `file` field in `product.json` to match your file name).
-2. Add a chart screenshot as `preview.png`.
-3. Fill in `features`, the real `description` and any custom `install` steps in
-   `product.json`, then bump `version` and add a `changelog` entry.
-4. Commit and push to `main`. The catalogue rebuilds and the download activates.
+۱. فایل کامپایل‌شده را با نام `XAU_Level_Map.ex5` در همین پوشه بگذارید.
+۲. یک تصویر از چارت را با نام `preview.png` اضافه کنید.
+۳. در `product.json` فیلد `file` را برابر نام فایل بگذارید، `features` و
+   `description` واقعی و در صورت نیاز مراحل `install` سفارشی را پر کنید، سپس
+   `version` و `changelog` را به‌روز کنید.
+۴. کامیت و پوش به `main` کنید. کاتالوگ بازسازی می‌شود و دانلود فعال می‌شود.
 
-## Installation
+## نصب
 
-Standard MT5 indicator installation: copy the `.ex5` into `MQL5/Indicators`
-inside **File**, **Open Data Folder**, refresh the Navigator, then drag it onto
-any `XAUUSD` chart. Indicators never place orders and do not need Algo Trading.
-Full guide: [docs/installation.md](../../../docs/installation.md).
+نصب استاندارد اندیکاتور در متاتریدر ۵: فایل `.ex5` را در مسیر `MQL5/Indicators`
+(از منوی **File** گزینه **Open Data Folder**) کپی کنید، در پنجره Navigator
+راست‌کلیک و Refresh بزنید و اندیکاتور را روی چارت `XAUUSD` بکشید. اندیکاتورها
+سفارش ثبت نمی‌کنند و به Algo Trading نیاز ندارند.
+راهنمای کامل: [docs/installation.md](../../../docs/installation.md).

@@ -1,8 +1,186 @@
 {
-  "generated": "2026-09-15T15:17:45Z",
-  "count": 2,
+  "generated": "2026-09-18T10:14:24Z",
+  "count": 6,
   "source": "scripts/build_catalog.py",
   "products": [
+    {
+      "id": "fibo-auto",
+      "type": "ea",
+      "name": "Fibo Auto",
+      "version": "1.0",
+      "author": "MT5 Tools",
+      "description": "خودکارسازی معاملات بر اساس سطوح فیبوناچی. این ربات تجاری نقاط ورود و خروج را از نسبت‌های فیبوناچی تشخیص می‌دهد و معاملات را اجرا می‌کند.",
+      "shortDescription": "ربات معاملاتی فیبوناچی با خودکارسازی کامل",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "fibonacci",
+        "fibo",
+        "auto-trading",
+        "ea",
+        "robot",
+        "فیبوناچی",
+        "معاملات خودکار"
+      ],
+      "features": [
+        "محاسبه خودکار سطوح فیبوناچی",
+        "اجرای خودکار معاملات",
+        "مدیریت ریسک پیشرفته",
+        "سیگنال‌های دقیق ورود و خروج"
+      ],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
+      "changelog": [
+        {
+          "version": "1.0",
+          "date": "2026-09-18",
+          "notes": [
+            "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+            "فایل اجرایی هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+          ]
+        }
+      ],
+      "path": "products/ea/fibo-auto",
+      "files": [],
+      "preview": "",
+      "readme": ""
+    },
+    {
+      "id": "fvg-mtf-pro",
+      "type": "indicator",
+      "name": "FVG MTF Pro",
+      "version": "4.0",
+      "author": "MT5 Tools",
+      "symbol": "All",
+      "timeframe": "Multi",
+      "description": "اندیکاتور Fair Value Gap چند تایم‌فریمی. ناحیه‌های خالی قیمت (FVG) را در چند تایم‌فریم هم‌زمان تشخیص می‌دهد تا نقاط بازگشت قیمت و فرصت‌های معاملاتی دیده شوند.",
+      "shortDescription": "تجزیه‌گر FVG با پشتیبانی چند تایم‌فریم",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "fvg",
+        "fair-value-gap",
+        "multi-timeframe",
+        "price-action",
+        "indicator",
+        "اندیکاتور",
+        "چند تایم‌فریمی"
+      ],
+      "features": [
+        "تشخیص Fair Value Gaps",
+        "تحلیل چند تایم‌فریمی",
+        "نمایش بصری سطوح کلیدی",
+        "سیگنال‌های هشداردهی"
+      ],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
+      "changelog": [
+        {
+          "version": "4.0",
+          "date": "2026-09-18",
+          "notes": [
+            "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+            "فایل اجرایی هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+          ]
+        }
+      ],
+      "path": "products/indicators/fvg-mtf-pro",
+      "files": [],
+      "preview": "",
+      "readme": ""
+    },
+    {
+      "id": "multi-theme-candle",
+      "type": "indicator",
+      "name": "MultiTheme Candle & BG",
+      "version": "1.0",
+      "author": "MT5 Tools",
+      "symbol": "All",
+      "timeframe": "All",
+      "description": "تغییر رنگ شمع‌ها و پس‌زمینه چارت بر اساس شرایط بازار. امکان شخصی‌سازی بصری قوی برای شناخت بهتر روندهای بازار.",
+      "shortDescription": "ابزار شخصی‌سازی رنگ شمع و پس‌زمینه",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "theme",
+        "candle-color",
+        "chart-background",
+        "visual",
+        "indicator",
+        "شخصی‌سازی",
+        "رنگ شمع"
+      ],
+      "features": [
+        "تغییر رنگ شمع خودکار",
+        "شخصی‌سازی پس‌زمینه",
+        "شناخت روندهای بازار",
+        "طراحی مدرن و انعطاف‌پذیر"
+      ],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
+      "changelog": [
+        {
+          "version": "1.0",
+          "date": "2026-09-18",
+          "notes": [
+            "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+            "کد منبع هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+          ]
+        }
+      ],
+      "path": "products/indicators/multi-theme-candle",
+      "files": [],
+      "preview": "",
+      "readme": ""
+    },
+    {
+      "id": "scalper-execution",
+      "type": "ea",
+      "name": "Scalper Execution Panel",
+      "version": "1.0",
+      "author": "MT5 Tools",
+      "symbol": "All",
+      "timeframe": "All",
+      "description": "پنل اجرای معاملات اسکالپینگ با کنترل کامل دستی. برای معامله‌گران سریع‌الحرکت که اجرای فوری معاملات و مدیریت دقیق ریسک می‌خواهند.",
+      "shortDescription": "پنل کنترل اسکالپینگ برای معاملات سریع",
+      "free": true,
+      "featured": true,
+      "tags": [
+        "scalping",
+        "execution-panel",
+        "manual-trading",
+        "risk-management",
+        "ea",
+        "اسکالپینگ",
+        "پنل معاملاتی"
+      ],
+      "features": [
+        "اجرای فوری معاملات",
+        "کنترل کامل ریسک و سود",
+        "رابط کاربری ساده و سریع",
+        "مناسب برای اسکالپینگ و معاملات سریع"
+      ],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
+      "changelog": [
+        {
+          "version": "1.0",
+          "date": "2026-09-18",
+          "notes": [
+            "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+            "کد منبع هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+          ]
+        }
+      ],
+      "path": "products/ea/scalper-execution",
+      "files": [],
+      "preview": "",
+      "readme": ""
+    },
     {
       "id": "xau-level-map",
       "type": "indicator",
@@ -10,29 +188,32 @@
       "version": "1.0.0",
       "symbol": "XAUUSD",
       "timeframe": "All",
-      "description": "Reference product folder for an indicator. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
-      "file": "XAU_Level_Map.ex5",
-      "preview": "",
+      "description": "پوشه نمونه برای نشان دادن ساختار یک اندیکاتور. متادیتا روی سایت منتشر می‌شود ولی فایل کامپایل‌شده هنوز بارگذاری نشده است، بنابراین دکمه دانلود غیرفعال می‌ماند.",
       "free": true,
-      "featured": true,
+      "featured": false,
       "tags": [
         "gold",
         "levels",
-        "example"
+        "example",
+        "indicator",
+        "نمونه"
       ],
-      "updated": "2026-09-15",
-      "license": "Free to use",
+      "features": [],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
       "changelog": [
         {
           "version": "1.0.0",
-          "date": "2026-09-15",
+          "date": "2026-09-18",
           "notes": [
-            "Product folder created. Waiting for the compiled .ex5 to be published."
+            "پوشه محصول نمونه ساخته شد. فایل کامپایل‌شده (.ex5) هنوز منتشر نشده است."
           ]
         }
       ],
       "path": "products/indicators/xau-level-map",
       "files": [],
+      "preview": "",
       "readme": "README.md"
     },
     {
@@ -42,29 +223,32 @@
       "version": "1.0.0",
       "symbol": "XAUUSD",
       "timeframe": "M1",
-      "description": "Reference product folder for an Expert Advisor. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
-      "file": "XAU_SP2L_EA.ex5",
-      "preview": "",
+      "description": "پوشه نمونه برای نشان دادن ساختار یک اکسپرت ادوایزر. متادیتا روی سایت منتشر می‌شود ولی فایل کامپایل‌شده هنوز بارگذاری نشده است، بنابراین دکمه دانلود غیرفعال می‌ماند.",
       "free": true,
-      "featured": true,
+      "featured": false,
       "tags": [
         "gold",
         "xauusd",
-        "example"
+        "example",
+        "ea",
+        "نمونه"
       ],
-      "updated": "2026-09-15",
-      "license": "Free to use",
+      "features": [],
+      "requirements": [],
+      "updated": "2026-09-18",
+      "license": "استفاده آزاد",
       "changelog": [
         {
           "version": "1.0.0",
-          "date": "2026-09-15",
+          "date": "2026-09-18",
           "notes": [
-            "Product folder created. Waiting for the compiled .ex5 to be published."
+            "پوشه محصول نمونه ساخته شد. فایل کامپایل‌شده (.ex5) هنوز منتشر نشده است."
           ]
         }
       ],
       "path": "products/ea/xau-sp2l",
       "files": [],
+      "preview": "",
       "readme": "README.md"
     }
   ]

@@ -1,25 +1,26 @@
 # XAU SP2L EA
 
-This folder is the working example of how an Expert Advisor is published on the
-site. Its metadata is real and live; the compiled program is not published yet,
-so the site shows the specification and keeps the download button disabled
-instead of linking to a file that does not exist.
+این پوشه نمونه‌ای زنده از ساختار یک اکسپرت ادوایزر روی سایت است. متادیتا واقعی
+و روی سایت منتشر شده، اما برنامه کامپایل‌شده هنوز وجود ندارد؛ به همین دلیل سایت
+مشخصات را نشان می‌دهد و دکمه دانلود را غیرفعال نگه می‌دارد، نه اینکه به فایلی
+لینک بدهد که وجود ندارد.
 
-## Publishing the real tool
+## انتشار ابزار واقعی
 
-1. Drop the compiled file into this folder as `XAU_SP2L_EA.ex5` (or change the
-   `file` field in `product.json` to match your file name).
-2. Add a chart screenshot as `preview.png`.
-3. Fill in `features`, `requirements` and the real `description` in
-   `product.json`, and bump `version` plus the `changelog` entry.
-4. Commit and push to `main`. The deploy workflow rebuilds the catalogue and the
-   product appears with an active download button.
+۱. فایل کامپایل‌شده را با نام `XAU_SP2L_EA.ex5` در همین پوشه بگذارید.
+۲. یک تصویر از چارت را با نام `preview.png` اضافه کنید.
+۳. در `product.json` فیلد `file` را برابر نام فایل بگذارید، `features` و
+   `description` واقعی را پر کنید و `version` را همراه با یک رکورد `changelog`
+   بالا ببرید.
+۴. کامیت و پوش به `main` کنید. وورک‌فلوی انتشار، کاتالوگ را بازسازی می‌کند و
+   ابزار با دکمه دانلود فعال نمایش داده می‌شود.
 
-## Installation
+## نصب
 
-Standard MT5 Expert Advisor installation: copy the `.ex5` into
-`MQL5/Experts` inside **File**, **Open Data Folder**, refresh the Navigator, drag
-it onto an `XAUUSD` M1 chart and enable Algo Trading. The full walkthrough is in
-[docs/installation.md](../../../docs/installation.md).
+نصب استاندارد اکسپرت در متاتریدر ۵: فایل `.ex5` را در مسیر `MQL5/Experts` (از
+منوی **File** گزینه **Open Data Folder**) کپی کنید، در پنجره Navigator راست‌کلیک
+و Refresh بزنید، اکسپرت را روی چارت `XAUUSD` تایم‌فریم M1 بکشید و دکمه
+Algo Trading را فعال کنید. راهنمای کامل در
+[docs/installation.md](../../../docs/installation.md) آمده است.
 
-Test on a demo account first. Automated trading carries real risk.
+اول روی حساب دمو تست کنید. معاملات خودکار ریسک واقعی دارد.

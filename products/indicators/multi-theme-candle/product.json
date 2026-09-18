@@ -1,1 +1,41 @@
-{"id":"multi-theme-candle","name":"MultiTheme Candle & BG","type":"indicator","version":"1.0","author":"MT5 Tools","description":"تغییر رنگ‌های شمع و پس‌زمینه چارت بر اساس شرایط بازار. این اندیکاتور امکان شخصی‌سازی بصری قوی برای بهتر شناخت روند‌های بازار فراهم می‌کند.","shortDescription":"ابزار شخصی‌سازی رنگ شمع و پس‌زمینه","features":["تغییر رنگ شمع خودکار","شخصی‌سازی پس‌زمینه","شناخت روند‌های بازار","طراحی مدرن و انعطاف‌پذیر"],"files":{"executable":"MultiThemeCandleAndBG.ex5","source":"MultiThemeCandleAndBG.mq5"},"preview":"preview.png"}
+{
+  "id": "multi-theme-candle",
+  "type": "indicator",
+  "name": "MultiTheme Candle & BG",
+  "version": "1.0",
+  "author": "MT5 Tools",
+  "symbol": "All",
+  "timeframe": "All",
+  "description": "تغییر رنگ شمع‌ها و پس‌زمینه چارت بر اساس شرایط بازار. امکان شخصی‌سازی بصری قوی برای شناخت بهتر روندهای بازار.",
+  "shortDescription": "ابزار شخصی‌سازی رنگ شمع و پس‌زمینه",
+  "free": true,
+  "featured": true,
+  "tags": [
+    "theme",
+    "candle-color",
+    "chart-background",
+    "visual",
+    "indicator",
+    "شخصی‌سازی",
+    "رنگ شمع"
+  ],
+  "features": [
+    "تغییر رنگ شمع خودکار",
+    "شخصی‌سازی پس‌زمینه",
+    "شناخت روندهای بازار",
+    "طراحی مدرن و انعطاف‌پذیر"
+  ],
+  "requirements": [],
+  "updated": "2026-09-18",
+  "license": "استفاده آزاد",
+  "changelog": [
+    {
+      "version": "1.0",
+      "date": "2026-09-18",
+      "notes": [
+        "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+        "کد منبع هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+      ]
+    }
+  ]
+}

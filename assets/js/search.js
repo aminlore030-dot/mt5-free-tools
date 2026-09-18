@@ -9,10 +9,41 @@
 
   var MT5 = window.MT5 || (window.MT5 = {});
 
-  function tokenize(query) {
-    return String(query || "")
+  /* Persian and Arabic text has to be folded before matching: the same word can
+     be written with different letter shapes, with or without a zero width
+     non-joiner, and with or without diacritics. "تایم‌فریم" and "تایمفریم",
+     "نرم‌افزار" and "نرمافزار" are the same word to a reader but not to a
+     string comparison, so both the query and the indexed text are normalised. */
+  var LETTER_EQUIVALENTS = {
+    "ي": "ی", "ى": "ی", "ك": "ک", "ة": "ه", "ۀ": "ه",
+    "أ": "ا", "إ": "ا", "آ": "ا", "ٱ": "ا", "ؤ": "و", "ئ": "ی"
+  };
+  var DIGIT_EQUIVALENTS = {
+    "۰": "0", "۱": "1", "۲": "2", "۳": "3", "۴": "4",
+    "۵": "5", "۶": "6", "۷": "7", "۸": "8", "۹": "9",
+    "٠": "0", "١": "1", "٢": "2", "٣": "3", "٤": "4",
+    "٥": "5", "٦": "6", "٧": "7", "٨": "8", "٩": "9"
+  };
+  var DIACRITICS = /[\u064B-\u065F\u0670\u06D6-\u06ED]/g;
+  var INVISIBLE = /[\u200B-\u200F\u202A-\u202E\u2060\uFEFF]/g;
+  var EQUIVALENT = /[يىكۀةأإآٱؤئ]/g;
+  var DIGITS = /[۰-۹٠-٩]/g;
+
+  function normalize(text) {
+    return String(text === null || text === undefined ? "" : text)
       .toLowerCase()
-      .split(/[^a-z0-9%._+#]+/)
+      .replace(DIACRITICS, "")
+      .replace(INVISIBLE, "")
+      .replace(EQUIVALENT, function (ch) { return LETTER_EQUIVALENTS[ch] || ch; })
+      .replace(DIGITS, function (ch) { return DIGIT_EQUIVALENTS[ch] || ch; });
+  }
+
+  /* Any letter or digit of any script is a valid token character, so Persian
+     queries are tokenised instead of being dropped. */
+  function tokenize(query) {
+    var splitter = /[^\p{L}\p{N}%._+#]+/u;
+    return normalize(query)
+      .split(splitter)
       .filter(function (token) { return token.length > 0; });
   }
 
@@ -24,7 +55,7 @@
       (product.tags || []).join(" "),
       (product.features || []).join(" ")
     ];
-    var value = parts.filter(Boolean).join(" ").toLowerCase();
+    var value = normalize(parts.filter(Boolean).join(" "));
     try {
       Object.defineProperty(product, "__haystack", { value: value, enumerable: false });
     } catch (err) {
@@ -35,7 +66,7 @@
 
   function score(product, tokens) {
     var hay = haystack(product);
-    var name = String(product.name || "").toLowerCase();
+    var name = normalize(product.name);
     var total = 0;
 
     for (var i = 0; i < tokens.length; i++) {
@@ -44,10 +75,10 @@
       var points = 1;
       if (name.indexOf(token) !== -1) points += 4;
       if (name.indexOf(token) === 0) points += 3;
-      if (String(product.symbol || "").toLowerCase() === token) points += 3;
-      if (String(product.timeframe || "").toLowerCase() === token) points += 2;
+      if (normalize(product.symbol) === token) points += 3;
+      if (normalize(product.timeframe) === token) points += 2;
       if ((product.tags || []).some(function (tag) {
-        return String(tag).toLowerCase() === token;
+        return normalize(tag) === token;
       })) points += 2;
       total += points;
     }
@@ -68,5 +99,5 @@
       .map(function (row) { return row.item; });
   }
 
-  MT5.search = { tokenize: tokenize, score: score, query: query };
+  MT5.search = { tokenize: tokenize, normalize: normalize, score: score, query: query };
 })();

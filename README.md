@@ -16,13 +16,21 @@ Live site: https://aminlore030-dot.github.io/mt5-free-tools/
 - Installation guide, FAQ and changelog written once as Markdown in `docs/`
 - Light and dark theme, remembered in `localStorage`
 - Optional donation section, configured in one file, hidden when unset
-- Deploys itself on every push to `main` once the workflow is in place
+- Deploys itself on every push to `main`, rebuilding the catalogue first
+
+## Current status
+
+The catalogue lists six tools. No compiled `.ex5` or `.mq5` file has been
+published in this repository yet, so every download button is disabled and each
+product page explains that instead of linking to a file that does not exist.
+Dropping the real file into the product folder and pushing turns the button on;
+nothing else needs to change.
 
 ## Repository structure
 
 ```
 .
-├── .github/deploy-pages.workflow.yml   move to .github/workflows/deploy.yml
+├── .github/workflows/deploy.yml   validate → rebuild catalogue → deploy to Pages
 ├── assets/
 │   ├── css/style.css              design system, components
 │   ├── css/responsive.css         breakpoint overrides
@@ -36,11 +44,12 @@ Live site: https://aminlore030-dot.github.io/mt5-free-tools/
 ├── products/
 │   ├── ea/<id>/product.json       one folder per Expert Advisor
 │   └── indicators/<id>/product.json
-├── docs/                          installation.md, faq.md, changelog.md
+├── docs/                          installation.md, faq.md, changelog.md, publishing.md
 ├── scripts/build_catalog.py       scanner: writes catalog.json + sitemap.xml
 ├── index.html products.html ea.html indicators.html product.html
 ├── docs.html about.html donate.html 404.html
 ├── robots.txt sitemap.xml manifest.webmanifest .nojekyll
+├── LICENSE                        MIT for the site; the tools themselves are free to use
 └── README.md
 ```
 
@@ -71,15 +80,17 @@ Live site: https://aminlore030-dot.github.io/mt5-free-tools/
 }
 ```
 
-3. Drop the compiled `MyTool.ex5` and a `preview.png` into the same folder.
-4. Commit and push to `main`.
+3. Drop the real compiled `MyTool.ex5` and a real `preview.png` into the same
+   folder, and point `"file": "MyTool.ex5"` at it so the download button uses it.
+   Never commit a placeholder: every recognised extension that exists in the
+   folder is published as a real download. If the file is not ready, leave it
+   out — the page still renders, with the button disabled and an explanation.
+4. Commit and push to `main`. The workflow validates the metadata, rebuilds the
+   catalogue and publishes the site.
 
 That is the whole process. No HTML file is ever edited to publish a product.
-Field reference: [products/README.md](products/README.md).
-
-If you deploy from the branch instead of Actions, run
-`python3 scripts/build_catalog.py` once before committing so the catalogue index
-includes the new folder.
+Field reference: [products/README.md](products/README.md). The same steps in
+Persian, with troubleshooting: [docs/publishing.md](docs/publishing.md).
 
 Useful behaviour while a tool is not finished:
 
@@ -127,28 +138,31 @@ python3 -m http.server 8080           # then open http://localhost:8080/
 Validate product metadata without writing files:
 
 ```bash
-python3 scripts/build_catalog.py --check
+python3 scripts/build_catalog.py --check --strict
 ```
+
+`--strict` exits with status 1 on any warning (missing declared file, invalid
+JSON, unknown type). The deploy workflow runs exactly that command, so broken
+metadata fails the build instead of reaching the published site.
 
 ## Deployment
 
-Two options, both free.
+One workflow, [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
+published with GitHub Actions. Open **Settings**, **Pages**, **Build and
+deployment** and set the source to **GitHub Actions** (already the case for this
+repository). Every push to `main` then:
 
-**A. Deploy from a branch, works immediately.** Open **Settings**, **Pages**,
-**Build and deployment**, choose source **Deploy from a branch**, branch `main`,
-folder `/ (root)`. The catalogue index is committed, so every page works right
-away. Remember to run the build script locally when you add a product.
+1. validates every `products/**/product.json` with `--check --strict`,
+2. rebuilds `assets/data/catalog.json` and `sitemap.xml` from the product folders,
+3. uploads the repository as the site artifact and deploys it with the official
+   Pages actions.
 
-**B. Deploy with GitHub Actions, rebuilds the catalogue for you.** Move
-`.github/deploy-pages.workflow.yml` to `.github/workflows/deploy.yml`, then set
-the Pages source to **GitHub Actions**. Every push to `main` checks out the
-repository, runs `scripts/build_catalog.py` with the Pages base URL, uploads the
-whole site as an artifact and deploys it with the official Pages actions. The
-workflow file sits outside `.github/workflows/` only because the token that
-created this site was not allowed to write into that folder.
+No third-party hosting, no paid service, no secrets beyond the automatic Pages
+token, and the catalogue can no longer go stale relative to the product folders.
 
-Either way: no third-party hosting, no paid service, no secrets beyond the
-automatic Pages token.
+Deploying from the branch instead (**Settings**, **Pages**, source *Deploy from
+a branch*) also works, because the generated catalogue is committed — but then
+run `python3 scripts/build_catalog.py` yourself before every push.
 
 Paths are relative everywhere, so the site works at
 `https://user.github.io/repo/` and at a domain root. `404.html` computes a
@@ -167,6 +181,13 @@ The frontend only consumes `assets/data/catalog.json`. A future backend,
 licensing service, download counter or GitHub Releases integration can produce
 or enrich that file without touching the pages. Unknown fields in `product.json`
 are carried through to the catalogue for exactly that reason.
+
+## Licence
+
+The website — HTML, CSS, JavaScript, Python tooling and documentation — is MIT
+licensed, see [LICENSE](LICENSE). The Expert Advisors and indicators published
+under `products/` are free to use, provided as-is, with no warranty and no
+guarantee of profitability.
 
 ## Disclaimer
 
