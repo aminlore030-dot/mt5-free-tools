@@ -1,1 +1,0 @@
-MQ5 Source Code - Scalper Execution Panel v7.20. Professional scalping execution tool with draggable live SL/TP, risk management, and DPI-aware interface.

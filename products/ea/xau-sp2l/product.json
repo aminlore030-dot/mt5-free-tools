@@ -5,19 +5,27 @@
   "version": "1.0.0",
   "symbol": "XAUUSD",
   "timeframe": "M1",
-  "description": "Reference product folder for an Expert Advisor. The metadata is live on the site, the compiled file has not been published yet, so its download stays disabled.",
-  "file": "XAU_SP2L_EA.ex5",
-  "preview": "preview.png",
+  "description": "پوشه نمونه برای نشان دادن ساختار یک اکسپرت ادوایزر. متادیتا روی سایت منتشر می‌شود ولی فایل کامپایل‌شده هنوز بارگذاری نشده است، بنابراین دکمه دانلود غیرفعال می‌ماند.",
   "free": true,
-  "featured": true,
-  "tags": ["gold", "xauusd", "example"],
-  "updated": "2026-09-15",
-  "license": "Free to use",
+  "featured": false,
+  "tags": [
+    "gold",
+    "xauusd",
+    "example",
+    "ea",
+    "نمونه"
+  ],
+  "features": [],
+  "requirements": [],
+  "updated": "2026-09-18",
+  "license": "استفاده آزاد",
   "changelog": [
     {
       "version": "1.0.0",
-      "date": "2026-09-15",
-      "notes": ["Product folder created. Waiting for the compiled .ex5 to be published."]
+      "date": "2026-09-18",
+      "notes": [
+        "پوشه محصول نمونه ساخته شد. فایل کامپایل‌شده (.ex5) هنوز منتشر نشده است."
+      ]
     }
   ]
 }

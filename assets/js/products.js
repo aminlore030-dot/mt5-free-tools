@@ -222,8 +222,8 @@
     var rows = [
       ["نوع", product.typeLabel],
       ["نسخه", product.version ? "v" + product.version : T.dash],
-      ["نماد", product.symbol || T.any],
-      ["تایم‌فریم", product.timeframe || T.any]
+      ["نماد", product.symbol || T.notSet],
+      ["تایم‌فریم", product.timeframe || T.notSet]
     ];
     return '<dl class="specs">' + rows.map(function (row) {
       return "<div><dt>" + esc(row[0]) + "</dt><dd>" + esc(row[1]) + "</dd></div>";
@@ -582,8 +582,8 @@
       '<dl class="spec-table">' +
       [["نوع", product.typeLabel],
        ["نسخه", product.version ? "v" + product.version : T.notSet],
-       ["نماد", product.symbol || T.any],
-       ["تایم‌فریم", product.timeframe || T.any],
+       ["نماد", product.symbol || T.notSet],
+       ["تایم‌فریم", product.timeframe || T.notSet],
        ["پوشه نصب", product.installFolder],
        ["مجوز", product.license || T.licenceFree]]
       .map(function (row) { return "<div><dt>" + esc(row[0]) + "</dt><dd>" + esc(row[1]) + "</dd></div>"; }).join("") +

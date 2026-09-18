@@ -1,14 +1,12 @@
-# Ready-to-use GitHub Pages deployment workflow.
+# Deploy MT5 Free Tools to GitHub Pages.
 #
-# Move or copy this file to .github/workflows/deploy.yml to enable it, then set
-# Settings > Pages > Build and deployment > Source to "GitHub Actions".
-# It lives here because the token used to create this repository could not write
-# into .github/workflows/ (that path needs the "workflow" permission).
+# On every push to main this workflow
+#   1. validates every products/**/product.json (a broken manifest fails the run),
+#   2. rebuilds assets/data/catalog.json and sitemap.xml from the product folders,
+#   3. publishes the whole repository as the site.
 #
-# Until then the site is fully deployable with Settings > Pages > Deploy from a
-# branch > main > / (root): the catalogue index is committed, so every page
-# works. The only thing this workflow adds is regenerating
-# assets/data/catalog.json and sitemap.xml automatically on every push.
+# It needs Settings > Pages > Build and deployment > Source = "GitHub Actions".
+# No secrets are required beyond the automatic Pages token.
 
 name: Deploy site to GitHub Pages
 
@@ -24,7 +22,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -37,6 +35,9 @@ jobs:
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+
+      - name: Validate product metadata
+        run: python3 scripts/build_catalog.py --check --strict
 
       - name: Build product catalogue and sitemap
         run: python3 scripts/build_catalog.py --site-url "${{ steps.pages.outputs.base_url }}"
@@ -56,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

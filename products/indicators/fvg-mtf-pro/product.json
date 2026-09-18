@@ -1,1 +1,41 @@
-{"id":"fvg-mtf-pro","name":"FVG MTF Pro v4","type":"indicator","version":"4.0","author":"MT5 Tools","description":"اندیکاتور Fair Value Gap چند تایم‌فریمی. تشخیص ناحیه‌های خالی قیمت (FVG) در چندین تایم‌فریم برای پیدا کردن نقاط بازگشت قیمت و فرصت‌های معاملاتی.","shortDescription":"تجزیه‌گر FVG با پشتیبانی چند تایم‌فریم","features":["تشخیص Fair Value Gaps","تحلیل چند تایم‌فریمی","نمایش بصری سطوح کلیدی","سیگنال‌های هشداردهی"],"files":{"executable":"FVG_MTF_Pro_v4.ex5"},"preview":"preview.png"}
+{
+  "id": "fvg-mtf-pro",
+  "type": "indicator",
+  "name": "FVG MTF Pro",
+  "version": "4.0",
+  "author": "MT5 Tools",
+  "symbol": "All",
+  "timeframe": "Multi",
+  "description": "اندیکاتور Fair Value Gap چند تایم‌فریمی. ناحیه‌های خالی قیمت (FVG) را در چند تایم‌فریم هم‌زمان تشخیص می‌دهد تا نقاط بازگشت قیمت و فرصت‌های معاملاتی دیده شوند.",
+  "shortDescription": "تجزیه‌گر FVG با پشتیبانی چند تایم‌فریم",
+  "free": true,
+  "featured": true,
+  "tags": [
+    "fvg",
+    "fair-value-gap",
+    "multi-timeframe",
+    "price-action",
+    "indicator",
+    "اندیکاتور",
+    "چند تایم‌فریمی"
+  ],
+  "features": [
+    "تشخیص Fair Value Gaps",
+    "تحلیل چند تایم‌فریمی",
+    "نمایش بصری سطوح کلیدی",
+    "سیگنال‌های هشداردهی"
+  ],
+  "requirements": [],
+  "updated": "2026-09-18",
+  "license": "استفاده آزاد",
+  "changelog": [
+    {
+      "version": "4.0",
+      "date": "2026-09-18",
+      "notes": [
+        "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+        "فایل اجرایی هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+      ]
+    }
+  ]
+}

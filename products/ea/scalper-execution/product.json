@@ -1,1 +1,41 @@
-{"id":"scalper-execution","name":"Scalper Execution Panel","type":"ea","version":"1.0","author":"MT5 Tools","description":"پنل اجرای معاملات اسکالپینگ با کنترل کامل دستی. طراحی شده برای معامله‌گران سریع‌الحرکت که نیاز به اجرای فوری معاملات دارند.","shortDescription":"پنل کنترل اسکالپینگ برای معاملات سریع","features":["اجرای فوری معاملات","کنترل کامل ریسک و سود","رابط کاربری ساده و سریع","مناسب برای اسکالپینگ و معاملات سریع"],"files":{"source":"ScalperExecutionPanel.mq5"},"preview":"preview.png"}
+{
+  "id": "scalper-execution",
+  "type": "ea",
+  "name": "Scalper Execution Panel",
+  "version": "1.0",
+  "author": "MT5 Tools",
+  "symbol": "All",
+  "timeframe": "All",
+  "description": "پنل اجرای معاملات اسکالپینگ با کنترل کامل دستی. برای معامله‌گران سریع‌الحرکت که اجرای فوری معاملات و مدیریت دقیق ریسک می‌خواهند.",
+  "shortDescription": "پنل کنترل اسکالپینگ برای معاملات سریع",
+  "free": true,
+  "featured": true,
+  "tags": [
+    "scalping",
+    "execution-panel",
+    "manual-trading",
+    "risk-management",
+    "ea",
+    "اسکالپینگ",
+    "پنل معاملاتی"
+  ],
+  "features": [
+    "اجرای فوری معاملات",
+    "کنترل کامل ریسک و سود",
+    "رابط کاربری ساده و سریع",
+    "مناسب برای اسکالپینگ و معاملات سریع"
+  ],
+  "requirements": [],
+  "updated": "2026-09-18",
+  "license": "استفاده آزاد",
+  "changelog": [
+    {
+      "version": "1.0",
+      "date": "2026-09-18",
+      "notes": [
+        "متادیتای محصول در قالب استاندارد پوشه محصول بازنویسی شد.",
+        "کد منبع هنوز در مخزن منتشر نشده است؛ دکمه دانلود تا آن زمان غیرفعال می‌ماند."
+      ]
+    }
+  ]
+}

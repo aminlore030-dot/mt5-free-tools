@@ -11,7 +11,11 @@ Standard library only, so GitHub Actions needs no dependencies. Running it is
 optional for local previews and automatic on every deploy.
 
 Usage:
-  python3 scripts/build_catalog.py [--site-url https://user.github.io/repo/] [--check]
+  python3 scripts/build_catalog.py [--site-url https://user.github.io/repo/] [--check] [--strict]
+
+Exit status: 0 normally, 1 when --strict is given and any product produced a
+warning. The deploy workflow uses --strict so that broken metadata never reaches
+the published site.
 """
 
 import argparse
@@ -232,6 +236,8 @@ def main():
                         help="Absolute site URL used in sitemap.xml")
     parser.add_argument("--check", action="store_true",
                         help="Validate product files without writing anything")
+    parser.add_argument("--strict", action="store_true",
+                        help="Exit with status 1 when any product produced a warning")
     arguments = parser.parse_args()
 
     print("Scanning %s" % PRODUCTS_DIR)
@@ -244,13 +250,13 @@ def main():
 
     if arguments.check:
         print("Check finished: %d product(s), %d warning(s)" % (len(products), len(warnings)))
-        return 0
+        return 1 if (arguments.strict and warnings) else 0
 
     write_catalog(products)
     write_sitemap(products, arguments.site_url)
     print("Wrote %s and %s" % (os.path.relpath(CATALOG_PATH, ROOT), os.path.relpath(SITEMAP_PATH, ROOT)))
     print("Done: %d product(s), %d warning(s)" % (len(products), len(warnings)))
-    return 0
+    return 1 if (arguments.strict and warnings) else 0
 
 
 if __name__ == "__main__":
