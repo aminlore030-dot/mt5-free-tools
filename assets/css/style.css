@@ -275,8 +275,10 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
   background: var(--surface-2);
   color: var(--text-3);
   border-color: var(--border);
+  /* No pointer-events: none here: the button carries a title="…" that explains
+     why the download is disabled, and a tooltip needs hover events to appear. */
   cursor: not-allowed;
-  pointer-events: none;
+  user-select: none;
 }
 
 /* ----------------------------------------------------------------- badges */
